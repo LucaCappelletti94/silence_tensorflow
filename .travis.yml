@@ -30,7 +30,6 @@ script:
 - rm -rf .coverage
 - coverage erase
 - pytest --cov=silence_tensorflow --cov-report xml:coverage.xml
-- coverage combine --append
 - coverage report
 - coverage xml
 - sonar-scanner
