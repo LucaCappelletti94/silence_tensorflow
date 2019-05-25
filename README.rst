@@ -18,7 +18,7 @@ How do I use it?
 ----------------------------------------
 You only need to import the package before import Tensorflow:
 
-.. code:: bash
+.. code:: python
 
     import silence_tensorflow
     import tensorflow as tf
@@ -33,7 +33,7 @@ This package will set the `KMP_AFFINITY` system variable to `"noverbose"`, `TF_C
 
 If you need a custom value for `KMP_AFFINITY` you should reset it after importing the package, as follows:
 
-.. code:: bash
+.. code:: python
 
     import os
     backup = os.environ["KMP_AFFINITY"]
