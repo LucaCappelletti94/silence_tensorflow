@@ -1,0 +1,9 @@
+README.rst
+setup.py
+silence_tensorflow/__init__.py
+silence_tensorflow/__version__.py
+silence_tensorflow.egg-info/PKG-INFO
+silence_tensorflow.egg-info/SOURCES.txt
+silence_tensorflow.egg-info/dependency_links.txt
+silence_tensorflow.egg-info/requires.txt
+silence_tensorflow.egg-info/top_level.txt
