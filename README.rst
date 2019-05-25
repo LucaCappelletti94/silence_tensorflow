@@ -1,6 +1,6 @@
 silence_tensorflow
 ========================================
-|travis| |sonar_quality| |sonar_maintainability| |sonar_coverage| |code_climate_maintainability|
+|travis| |sonar_quality| |sonar_maintainability| |sonar_coverage| |code_climate_maintainability| |pip|
 
 Simple python package to shut up Tensorflow warnings and logs. 
 
@@ -56,3 +56,6 @@ If you need a custom value for `KMP_AFFINITY` you should reset it after importin
 .. |code_climate_maintainability| image:: https://api.codeclimate.com/v1/badges/25fb7c6119e188dbd12c/maintainability
    :target: https://codeclimate.com/github/LucaCappelletti94/silence_tensorflow/maintainability
    :alt: Maintainability
+
+.. |pip| image:: https://badge.fury.io/py/silence_tensorflow.svg
+    :target: https://badge.fury.io/py/silence_tensorflow
