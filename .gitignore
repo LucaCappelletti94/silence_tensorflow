@@ -1,16 +1,16 @@
-.notipy.json
-
-.notipy.json
-*/__pycache__/
-
-\.DS_Store
+\.vscode/
 
 */__pycache__/*
 
+**/__pycache__/*
+
+.notipy.json
+
+*/__pycache__/
+
 **/__pycache__/
 
-\.vscode/
+.notipy.json
+\.DS_Store
 
 
-
-**/__pycache__/*

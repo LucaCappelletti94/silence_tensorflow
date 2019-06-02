@@ -30,7 +30,7 @@ def find_version(*file_paths):
 
 __version__ = find_version("silence_tensorflow", "__version__.py")
 
-test_deps =["codacy-coverage", "pytest", "pytest-cov", "coveralls", "validate_version_code"]
+test_deps =["pytest-cov", "coveralls", "validate_version_code", "pytest", "codacy-coverage"]
 
 extras = {
     'test': test_deps,
