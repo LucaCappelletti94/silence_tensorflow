@@ -18,7 +18,31 @@ Since some software handling coverages sometime get slightly different results, 
 
 |coveralls| |sonar_coverage| |code_climate_coverage|
 
-AFTER
+How do I use it?
+----------------------------------------
+You only need to import the package before import Tensorflow:
+
+.. code:: python
+
+    import silence_tensorflow
+    import tensorflow as tf
+
+    ...
+
+    # your code
+
+How does this work under the hood?
+----------------------------------------
+This package will set the `KMP_AFFINITY` system variable to `"noverbose"`, `TF_CPP_MIN_LOG_LEVEL` to level `2` (only errors logged) and silence both `FutureWarning` and `FutureWarning`.
+
+If you need a custom value for `KMP_AFFINITY` you should reset it after importing the package, as follows:
+
+.. code:: python
+
+    import os
+    backup = os.environ["KMP_AFFINITY"]
+    import silence_tensorflow
+    os.environ["KMP_AFFINITY"] = backup
 
 .. |travis| image:: https://travis-ci.org/LucaCappelletti94/silence_tensorflow.png
    :target: https://travis-ci.org/LucaCappelletti94/silence_tensorflow
