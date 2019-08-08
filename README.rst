@@ -68,8 +68,8 @@ If you need a custom value for `KMP_AFFINITY` you should reset it after importin
     :target: https://badge.fury.io/py/silence_tensorflow
     :alt: Pypi project
 
-.. |downloads| image:: https://pepy.tech/badge/silence_tensorflow
-    :target: https://pepy.tech/badge/silence_tensorflow
+.. |downloads| image:: https://pepy.tech/badge/silence-tensorflow
+    :target: https://pepy.tech/badge/silence-tensorflow
     :alt: Pypi total project downloads 
 
 .. |codacy|  image:: https://api.codacy.com/project/badge/Grade/e6fe64db1c9042bbaa4c0a20bde585dc
