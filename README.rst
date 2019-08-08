@@ -64,8 +64,8 @@ If you need a custom value for `KMP_AFFINITY` you should reset it after importin
     :target: https://coveralls.io/github/LucaCappelletti94/silence_tensorflow?branch=master
     :alt: Coveralls Coverage
 
-.. |pip| image:: https://badge.fury.io/py/silence_tensorflow.svg
-    :target: https://badge.fury.io/py/silence_tensorflow
+.. |pip| image:: https://badge.fury.io/py/silence-tensorflow.svg
+    :target: https://badge.fury.io/py/silence-tensorflow
     :alt: Pypi project
 
 .. |downloads| image:: https://pepy.tech/badge/silence-tensorflow
