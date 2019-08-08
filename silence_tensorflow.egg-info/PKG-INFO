@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: silence-tensorflow
-Version: 1.0.1
+Version: 1.0.2
 Summary: Simple python package to shut up Tensorflow warnings and logs.
 Home-page: https://github.com/LucaCappelletti94/silence_tensorflow
 Author: Luca Cappelletti
@@ -41,7 +41,7 @@ Description: silence_tensorflow
         
         How does this work under the hood?
         ----------------------------------------
-        This package will set the `KMP_AFFINITY` system variable to `"noverbose"`, `TF_CPP_MIN_LOG_LEVEL` to level `2` (only errors logged) and silence both `FutureWarning` and `FutureWarning`.
+        This package will set the `KMP_AFFINITY` system variable to `"noverbose"`, `TF_CPP_MIN_LOG_LEVEL` to level `2` (only errors logged) and silence both `FutureWarning` and `DeprecationWarning`.
         
         If you need a custom value for `KMP_AFFINITY` you should reset it after importing the package, as follows:
         
@@ -76,8 +76,8 @@ Description: silence_tensorflow
             :target: https://badge.fury.io/py/silence_tensorflow
             :alt: Pypi project
         
-        .. |downloads| image:: https://pepy.tech/badge/silence_tensorflow
-            :target: https://pepy.tech/badge/silence_tensorflow
+        .. |downloads| image:: https://pepy.tech/badge/silence-tensorflow
+            :target: https://pepy.tech/badge/silence-tensorflow
             :alt: Pypi total project downloads 
         
         .. |codacy|  image:: https://api.codacy.com/project/badge/Grade/e6fe64db1c9042bbaa4c0a20bde585dc
