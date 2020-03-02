@@ -44,8 +44,9 @@ If you need a custom value for `KMP_AFFINITY` you should reset it after importin
 .. code:: python
 
     import os
+    from silence_tensorflow import silence_tensorflow
     backup = os.environ["KMP_AFFINITY"]
-    import silence_tensorflow
+    silence_tensorflow()
     os.environ["KMP_AFFINITY"] = backup
 
 .. |travis| image:: https://travis-ci.org/LucaCappelletti94/silence_tensorflow.png
