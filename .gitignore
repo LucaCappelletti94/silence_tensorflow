@@ -13,3 +13,4 @@
 .notipy.json
 \.DS_Store
 *.egg-info
+.pytest_cache
