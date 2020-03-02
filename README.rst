@@ -1,6 +1,7 @@
 silence_tensorflow
 =========================================================================================
-|travis| |sonar_quality| |sonar_maintainability| |codacy| |code_climate_maintainability| |pip| |downloads|
+|travis| |sonar_quality| |sonar_maintainability|
+|codacy| |code_climate_maintainability| |pip| |downloads|
 
 Simple python package to shut up Tensorflow warnings and logs.
 
@@ -14,7 +15,8 @@ As usual, just download it using pip:
 
 Tests Coverage
 ----------------------------------------------
-Since some software handling coverages sometime get slightly different results, here's three of them:
+Since some software handling coverages sometimes
+get slightly different results, here's three of them:
 
 |coveralls| |sonar_coverage| |code_climate_coverage|
 
@@ -24,7 +26,8 @@ You only need to import the package before import Tensorflow:
 
 .. code:: python
 
-    import silence_tensorflow
+    from silence_tensorflow import silence_tensorflow
+    silence_tensorflow()
     import tensorflow as tf
 
     ...
@@ -33,7 +36,8 @@ You only need to import the package before import Tensorflow:
 
 How does this work under the hood?
 ----------------------------------------
-This package will set the `KMP_AFFINITY` system variable to `"noverbose"`, `TF_CPP_MIN_LOG_LEVEL` to level `2` (only errors logged) and silence both `FutureWarning` and `DeprecationWarning`.
+This package will set the `KMP_AFFINITY` system variable to `"noverbose"`,
+`TF_CPP_MIN_LOG_LEVEL` to level `3` (only errors logged) and silence both `FutureWarning` and `DeprecationWarning`.
 
 If you need a custom value for `KMP_AFFINITY` you should reset it after importing the package, as follows:
 
@@ -72,7 +76,7 @@ If you need a custom value for `KMP_AFFINITY` you should reset it after importin
     :target: https://pepy.tech/badge/silence-tensorflow
     :alt: Pypi total project downloads 
 
-.. |codacy|  image:: https://api.codacy.com/project/badge/Grade/e6fe64db1c9042bbaa4c0a20bde585dc
+.. |codacy| image:: https://api.codacy.com/project/badge/Grade/e6fe64db1c9042bbaa4c0a20bde585dc
     :target: https://www.codacy.com/app/LucaCappelletti94/silence_tensorflow?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LucaCappelletti94/silence_tensorflow&amp;utm_campaign=Badge_Grade
     :alt: Codacy Maintainability
 
