@@ -12,5 +12,4 @@
 
 .notipy.json
 \.DS_Store
-
-
+*.egg-info
