@@ -64,7 +64,7 @@ You can use the flag 'disable=unused-import' as such:
 How can I get pylint to ignore the unused variable?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 If you import silence_tensorflow in the context of a function
-you will get a differnt warning from pyling: unused variable.
+you will get a different warning from pyling: unused variable.
 You can use the flag 'disable=unused-variable' as such:
 
 .. code:: python
