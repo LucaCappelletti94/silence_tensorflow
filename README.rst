@@ -61,6 +61,22 @@ You can use the flag 'disable=unused-import' as such:
 
     # your code
 
+How can I get pylint to ignore the unused variable?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If you import silence_tensorflow in the context of a function
+you will get a differnt warning from pyling: unused variable.
+You can use the flag 'disable=unused-variable' as such:
+
+.. code:: python
+    
+    def func():
+        import silence_tensorflow.auto # noqa # pylint: disable=unused-variable
+        import tensorflow as tf
+
+        ...
+
+        # your code
+
 How does this work under the hood?
 ----------------------------------------
 This package will set the `KMP_AFFINITY` system variable to `"noverbose"`,
