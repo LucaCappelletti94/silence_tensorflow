@@ -34,6 +34,33 @@ You only need to import the package before import Tensorflow:
 
     # your code
 
+Can it be done within the import?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sure, you can do everything with a single line by
+importing the submodule auto:
+
+.. code:: python
+
+    import silence_tensorflow.auto
+    import tensorflow as tf
+
+    ...
+
+    # your code
+
+How can I get pylint to ignore the unused import?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+You can use the flag 'disable=unused-import' as such:
+
+.. code:: python
+
+    import silence_tensorflow.auto # noqa # pylint: disable=unused-import
+    import tensorflow as tf
+
+    ...
+
+    # your code
+
 How does this work under the hood?
 ----------------------------------------
 This package will set the `KMP_AFFINITY` system variable to `"noverbose"`,
