@@ -5,4 +5,4 @@ def test_silence_tensorflow():
     silence_tensorflow()
 
 def test_auto_silence():
-    import silence_tensorflow.auto # noqa # pylint: disable=unused-variable
+    import silence_tensorflow.auto  # pylint: disable=unused-variable

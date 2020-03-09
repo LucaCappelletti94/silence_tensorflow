@@ -54,7 +54,7 @@ You can use the flag 'disable=unused-import' as such:
 
 .. code:: python
 
-    import silence_tensorflow.auto # noqa # pylint: disable=unused-import
+    import silence_tensorflow.auto  # pylint: disable=unused-import
     import tensorflow as tf
 
     ...
@@ -70,7 +70,7 @@ You can use the flag 'disable=unused-variable' as such:
 .. code:: python
     
     def func():
-        import silence_tensorflow.auto # noqa # pylint: disable=unused-variable
+        import silence_tensorflow.auto  # pylint: disable=unused-variable
         import tensorflow as tf
 
         ...
