@@ -64,7 +64,7 @@ You can use the flag 'disable=unused-import' as such:
 How does this work under the hood?
 ----------------------------------------
 This package will set the `KMP_AFFINITY` system variable to `"noverbose"`,
-`TF_CPP_MIN_LOG_LEVEL` to level `3` (only errors logged) and silence both `FutureWarning` and `DeprecationWarning`.
+`TF_CPP_MIN_LOG_LEVEL` to level `3` (only errors logged).
 
 If you need a custom value for `KMP_AFFINITY` you should reset it after importing the package, as follows:
 
