@@ -60,9 +60,10 @@ def silence_tensorflow(
     if isinstance(level, str):
         level = Level.from_str(level)
 
-    assert isinstance(
-        level, Level
-    ), f"level must be a string or a Level instance, not {type(level)}"
+    if not isinstance(level, Level):
+        raise ValueError(
+            f"Invalid logging level: {level}, must be one of {', '.join(Level.__members__)}"
+        )
 
     logging.getLogger("tensorflow").setLevel(level.into_logging())
     os.environ["KMP_AFFINITY"] = "noverbose"
