@@ -80,5 +80,5 @@ def silence_tensorflow(
 
         tf.get_logger().setLevel(str(level))
         tf.autograph.set_verbosity(level.min_log_level)
-    except ModuleNotFoundError:
+    except (ModuleNotFoundError, AttributeError):
         pass
