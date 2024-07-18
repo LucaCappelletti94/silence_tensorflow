@@ -28,7 +28,7 @@ def find_version(*file_paths):
 
 __version__ = find_version("silence_tensorflow", "__version__.py")
 
-test_deps = ["pytest-cov", "validate_version_code", "pytest"]
+test_deps = ["pytest-cov", "tensorflow", "validate_version_code", "pytest"]
 
 extras = {
     "test": test_deps,

@@ -15,3 +15,5 @@
 *.egg-info
 .pytest_cache
 build
+model.tflite
+.coverage
