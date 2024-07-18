@@ -107,7 +107,7 @@ TFLite logs are not silenced by this package because [they have hardcoded the lo
 
 TFLite will cause info logs such as the following to be printed:
 
-```bash
+```plaintext
 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 ```
 
