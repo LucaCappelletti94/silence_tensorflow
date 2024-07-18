@@ -5,6 +5,7 @@
 [![license](https://img.shields.io/pypi/l/silence-tensorflow)](https://pypi.org/project/silence-tensorflow/)
 [![downloads](https://pepy.tech/badge/silence-tensorflow)](https://pepy.tech/project/silence-tensorflow)
 [![Github Actions](https://github.com/LucaCappelletti94/silence_tensorflow/actions/workflows/python.yml/badge.svg)](https://github.com/LucaCappelletti94/silence_tensorflow/actions/)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/e6fe64db1c9042bbaa4c0a20bde585dc)](https://app.codacy.com/gh/LucaCappelletti94/silence_tensorflow/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 Python package to shut up TensorFlow warnings and logs, letting you focus on the important errors.
 
