@@ -2,17 +2,18 @@
 
 import os
 import logging
-from typing import Union
+from typing import Union, Optional
 from enum import Enum
+from environments_utils import has_nvidia_gpu, has_amd_gpu
 
 
 class Level(Enum):
     """Logging level."""
 
+    NONE = "NONE"
     ERROR = "ERROR"
     WARNING = "WARNING"
     INFO = "INFO"
-    DEBUG = "DEBUG"
 
     @classmethod
     def from_str(cls, level: str):
@@ -26,16 +27,18 @@ class Level(Enum):
 
     def into_logging(self):
         """Get logging level."""
+        if self == Level.NONE:
+            return logging.CRITICAL
         return getattr(logging, self.value)
 
     @property
     def min_log_level(self) -> int:
         """Get minimum log level."""
         return {
-            Level.ERROR: 3,
-            Level.WARNING: 2,
-            Level.INFO: 1,
-            Level.DEBUG: 0,
+            Level.NONE: 3,
+            Level.ERROR: 2,
+            Level.WARNING: 1,
+            Level.INFO: 0,
         }[self]
 
     def __str__(self):
@@ -43,7 +46,8 @@ class Level(Enum):
 
 
 def silence_tensorflow(
-    level: Union[str, Level] = Level.ERROR,
+    level: Union[str, Level] = Level.NONE,
+    disable_onednn: Optional[bool] = None,
 ):
     """Silence every unnecessary warning from tensorflow.
 
@@ -52,10 +56,18 @@ def silence_tensorflow(
     level : Union[str, Level], optional
         Logging level, by default Level.ERROR
         Can be one of:
+        - "NONE": no messages
         - "ERROR": only error messages
         - "WARNING": error messages and warnings
         - "INFO": error messages, warnings and info
-        - "DEBUG": all messages
+    disable_onednn : Optional[bool], optional
+        Whether to disable oneDNN, which silences warnings such as:
+        "oneDNN custom operations are on. You may see slightly different
+         numerical results due to floating-point round-off errors from
+         different computation orders. To turn them off, set the environment
+         variable `TF_ENABLE_ONEDNN_OPTS=0`.
+        By default, it detects whether NVIDIA or AMD GPUs are present and
+        disables oneDNN if they are, by default None
     """
     if isinstance(level, str):
         level = Level.from_str(level)
@@ -68,6 +80,25 @@ def silence_tensorflow(
     logging.getLogger("tensorflow").setLevel(level.into_logging())
     os.environ["KMP_AFFINITY"] = "noverbose"
     os.environ["TF_CPP_MIN_LOG_LEVEL"] = str(level.min_log_level)
+    os.environ["GRPC_VERBOSITY"] = str(level)
+    os.environ["GLOG_minloglevel"] = str(level.min_log_level)
+
+    # If NVIDIA or AMD GPUs are present, disable oneDNN
+    if disable_onednn is None:
+        disable_onednn = has_nvidia_gpu() or has_amd_gpu()
+
+    if disable_onednn:
+        os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
+
+    try:
+        from absl import (  # pylint: disable=import-outside-toplevel
+            logging as absl_logging,  # pylint: disable=import-outside-toplevel
+        )
+
+        absl_logging.set_verbosity(level.into_logging())
+
+    except (ModuleNotFoundError, ImportError):
+        pass
 
     # We wrap this inside a try-except block
     # because we do not want to be the one package
@@ -78,7 +109,7 @@ def silence_tensorflow(
     try:
         import tensorflow as tf  # pylint: disable=import-outside-toplevel
 
-        tf.get_logger().setLevel(str(level))
+        tf.get_logger().setLevel(level.into_logging())
         tf.autograph.set_verbosity(level.min_log_level)
     except (ModuleNotFoundError, AttributeError):
         pass
