@@ -20,6 +20,7 @@ def test_silence_tensorflow_level():
     silence_tensorflow("ERROR")
     silence_tensorflow("WARNING")
     silence_tensorflow("INFO")
+    silence_tensorflow("NONE")
     silence_tensorflow("DEBUG")
 
 

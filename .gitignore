@@ -17,3 +17,5 @@
 build
 model.tflite
 .coverage
+dist
+test_readme.py

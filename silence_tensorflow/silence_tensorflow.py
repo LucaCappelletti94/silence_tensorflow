@@ -18,6 +18,8 @@ class Level(Enum):
     @classmethod
     def from_str(cls, level: str):
         """Get level from string."""
+        if level == "DEBUG":
+            level = "INFO"
         try:
             return getattr(cls, level.upper())
         except AttributeError as exc:
@@ -59,7 +61,7 @@ def silence_tensorflow(
         - "NONE": no messages
         - "ERROR": only error messages
         - "WARNING": error messages and warnings
-        - "INFO": error messages, warnings and info
+        - "INFO" or "DEBUG": error messages, warnings and info
     disable_onednn : Optional[bool], optional
         Whether to disable oneDNN, which silences warnings such as:
         "oneDNN custom operations are on. You may see slightly different
