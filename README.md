@@ -121,6 +121,22 @@ silence_tensorflow(disable_onednn=True)
 While I really tried to cover all possible logs that TensorFlow can produce, there are some logs that are not silenced by this package.
 Below you find the ones that we are aware of, alongside the reason why they are not silenced and what you can do to silence them.
 
+### NUMA node read from SysFS had negative value
+
+You may have encountered the following log:
+
+```plaintext
+successful NUMA node read from SysFS had negative value (-1)
+```
+
+This log means that TensorFlow is trying to read the NUMA node from the system file system and it is getting a negative value. This is not an error, but a warning, and this package cannot silence it automatically without administrative privileges. Since executing code you have just found online with administrative privileges is not a good idea, you can silence this log by running as root the following command in your terminal:
+
+```bash
+for a in /sys/bus/pci/devices/*; do echo 0 | sudo tee -a $a/numa_node; done
+```
+
+This command will set the NUMA node to 0 for all PCI devices, which is the default value and should not cause any issues. It does not fix the underlying issue, but it silences the log until you reboot your system.
+
 ### TensorFlow Lite (TFLite)
 
 TFLite logs are not silenced by this package because [they have hardcoded the logging level to `INFO`](https://github.com/tensorflow/tensorflow/blob/3570f6d986066b834a7f54f3c3ec60d0245193bd/tensorflow/lite/minimal_logging_ios.cc#L50) and there is no way to change it from the Python side.
