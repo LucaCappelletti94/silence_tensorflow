@@ -1,4 +1,5 @@
 """Tests for the silence_tensorflow package version."""
+
 from validate_version_code import validate_version_code
 from silence_tensorflow.__version__ import __version__
 

@@ -2,9 +2,8 @@
 
 import os
 import logging
-from typing import Union, Optional
+from typing import Union
 from enum import Enum
-from environments_utils import has_nvidia_gpu, has_amd_gpu
 
 
 class Level(Enum):
@@ -16,7 +15,7 @@ class Level(Enum):
     INFO = "INFO"
 
     @classmethod
-    def from_str(cls, level: str):
+    def from_str(cls, level: str) -> "Level":
         """Get level from string."""
         if level == "DEBUG":
             level = "INFO"
@@ -43,14 +42,13 @@ class Level(Enum):
             Level.INFO: 0,
         }[self]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.value
 
 
 def silence_tensorflow(
     level: Union[str, Level] = Level.NONE,
-    disable_onednn: Optional[bool] = None,
-):
+) -> None:
     """Silence every unnecessary warning from tensorflow.
 
     Parameters
@@ -62,14 +60,6 @@ def silence_tensorflow(
         - "ERROR": only error messages
         - "WARNING": error messages and warnings
         - "INFO" or "DEBUG": error messages, warnings and info
-    disable_onednn : Optional[bool], optional
-        Whether to disable oneDNN, which silences warnings such as:
-        "oneDNN custom operations are on. You may see slightly different
-         numerical results due to floating-point round-off errors from
-         different computation orders. To turn them off, set the environment
-         variable `TF_ENABLE_ONEDNN_OPTS=0`.
-        By default, it detects whether NVIDIA or AMD GPUs are present and
-        disables oneDNN if they are, by default None
     """
     if isinstance(level, str):
         level = Level.from_str(level)
@@ -84,23 +74,6 @@ def silence_tensorflow(
     os.environ["TF_CPP_MIN_LOG_LEVEL"] = str(level.min_log_level)
     os.environ["GRPC_VERBOSITY"] = str(level)
     os.environ["GLOG_minloglevel"] = str(level.min_log_level)
-
-    # If NVIDIA or AMD GPUs are present, disable oneDNN
-    if disable_onednn is None:
-        disable_onednn = has_nvidia_gpu() or has_amd_gpu()
-
-    if disable_onednn:
-        os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
-
-    try:
-        from absl import (  # pylint: disable=import-outside-toplevel
-            logging as absl_logging,  # pylint: disable=import-outside-toplevel
-        )
-
-        absl_logging.set_verbosity(level.into_logging())
-
-    except (ModuleNotFoundError, ImportError):
-        pass
 
     # We wrap this inside a try-except block
     # because we do not want to be the one package

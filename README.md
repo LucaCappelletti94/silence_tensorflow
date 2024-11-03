@@ -99,23 +99,6 @@ silence_tensorflow()
 os.environ["KMP_AFFINITY"] = backup
 ```
 
-## On the oneDNN warning
-
-This package is also able to silence the warning that TensorFlow prints when it uses oneDNN:
-
-```plaintext
-I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-```
-
-The silence_tensorflow function has a parameter called `disable_onednn` that is set to `None` by default. It will automatically disable oneDNN and therefore silence its warning when it detects that your environment has either an NVIDIA or an AMD GPU, making the use of oneDNN unnecessary and therefore the warning irrelevant. You can also set it to `True` or `False` to force the package to disable or enable oneDNN, respectively.
-
-```python
-from silence_tensorflow import silence_tensorflow
-
-# Disable oneDNN warning
-silence_tensorflow(disable_onednn=True)
-```
-
 ## Known limitations
 
 While I really tried to cover all possible logs that TensorFlow can produce, there are some logs that are not silenced by this package.
@@ -152,6 +135,16 @@ If you are willing to recompile your own version of TensorFlow Lite, you can cha
 ```cpp
 tflite::LoggerOptions::SetMinimumLogSeverity(tflite::TFLITE_LOG_SILENT);
 ```
+
+### oneDNN warning
+
+Another common warning that TensorFlow prints is the following:
+
+```plaintext
+I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+```
+
+I tried to automatically set the environment variable `TF_ENABLE_ONEDNN_OPTS` to `0` when GPU drivers are detected and in such cases using oneDNN is not necessary. However, this in some instances lead to TensorFlow __occasionally__ deadlocking and I had to revert the change.
 
 ## License
 

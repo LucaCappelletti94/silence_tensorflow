@@ -52,7 +52,6 @@ setup(
         "Programming Language :: Python :: 3",
     ],
     packages=find_packages(exclude=["contrib", "docs", "tests*"]),
-    install_requires=["environments_utils"],
     tests_require=test_deps,
     extras_require=extras,
 )
